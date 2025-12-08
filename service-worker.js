@@ -1,19 +1,10 @@
-self.addEventListener("install", event => {
-    event.waitUntil(
-        caches.open("v1").then(cache => {
-            return cache.addAll([
-                "index.html",
-                "manifest.json",
-                "musica/fondo.mp3",
-                "icon-192.png",
-                "icon-512.png"
-            ]);
-        })
-    );
+self.addEventListener("install", () => self.skipWaiting());
+
+self.addEventListener("activate", () => {
+    clients.claim();
 });
 
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.match(event.request).then(resp => resp || fetch(event.request))
-    );
+self.addEventListener("fetch", (event) => {
+    // No cache necesario, solo activar PWA
 });
+
