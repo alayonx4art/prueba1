@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antonio es tonto</title>
+<link rel="manifest" href="manifest.json">
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .card {
+        background: #222;
+        padding: 25px;
+        border-radius: 10px;
+        width: 320px;
+        text-align: center;
+        box-shadow: 0 0 10px #000;
+    }
+    input[type="password"] {
+        width: 90%;
+        padding: 8px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+    }
+    button {
+        padding: 8px 15px;
+        border: none;
+        background: #4c8bf5;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #secreto {
+        display: none;
+        margin-top: 20px;
+        background: #333;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+</style>
+</head>
+<body>
+<h2>Antonio es tonto - WebApp</h2>
+<p>Toca la pantalla una vez para activar el sonido.</p>
+<audio id="music" src="musica/fondo.mp3" loop style="display:none;"></audio>
+<script>
+document.body.addEventListener("click", function() {
+    const audio = document.getElementById("music");
+    audio.play().catch(e => console.log("Autoplay bloqueado"));
+});
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+<div class="card">
+    <h3>Ingresa la contraseña para desbloquear, pista, es un personaje que solo tu conoces ñoño, por si
+ian entra de chismoso. nisiquiera tengo que poner mas que, belly. y ya sabras el nombre y si ian lo sabe
+es furro de closet,</h3>
+    <input type="password" id="pwd" placeholder="Contraseña">
+    <br>
+    <button onclick="check()">Mostrar</button>
+    <p id="msg"></p>
+
+    <div id="secreto">
+        <h4>Texto desbloqueado:</h4>
+        <p id="contenido">
+            cochino borra tu historial de google  nisiquiera escribi nada y me sale san chan leaks ni bien pongo c y me salen mil paginas, todo precos, y me culpas de cuidar a taco, menso te vas a exponer con patapin que es ese nup quien usa mas esta tableta, sanchan me robo dos dolaresssss, perdi como 10 minutos haciendo este html en ves de descargar el clip estudio crackeado que originalmente entre a buscar.en fin si ves esto alguna ves borra tu historial o usa brave
+        </p>
+    </div>
+</div>
+
+<script>
+function check() {
+    const pwd = document.getElementById("pwd").value;
+
+       const correct = "candy";
+
+    if (pwd === correct) {
+        document.getElementById("secreto").style.display = "block";
+        document.getElementById("msg").innerText = "";
+    } else {
+        document.getElementById("msg").innerText = "Contraseña incorrecta";
+    }
+}
+</script>
+
+</body>
+
+
+
+</body>
+</html>
