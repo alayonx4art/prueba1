@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basurero del Caos 🗑️</title>
+    <title>Caos Académico 📚</title>
 
     <style>
         * {
@@ -19,9 +20,7 @@
             background: #222;
         }
 
-        /* =========================
-           FONDO ANIMADO
-           ========================= */
+        /* FONDO ANIMADO */
 
         .fondo {
             position: fixed;
@@ -42,64 +41,45 @@
         }
 
         @keyframes zoom {
-            from {
-                transform: scale(1);
-            }
-
-            to {
-                transform: scale(1.08);
-            }
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
         }
 
-        /* =========================
-           CONTENIDO
-           ========================= */
+        /* CONTENIDO */
 
         .contenedor {
             height: 100vh;
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
             gap: 25px;
-
             text-align: center;
+            padding: 20px;
         }
 
         h1 {
             color: white;
-            font-size: 55px;
-
-            text-shadow:
-                0 0 10px black,
-                0 0 20px black;
+            font-size: clamp(30px, 5vw, 55px);
+            text-shadow: 0 0 10px black, 0 0 20px black;
         }
 
         #contador {
             color: white;
             font-size: 25px;
             font-weight: bold;
-
             text-shadow: 2px 2px 5px black;
         }
 
-        /* =========================
-           BOTÓN
-           ========================= */
+        /* BOTÓN */
 
         button {
             padding: 20px 45px;
-
             font-size: 25px;
             font-weight: bold;
-
             border: none;
             border-radius: 15px;
-
             cursor: pointer;
-
             background: #75b843;
             color: white;
 
@@ -116,142 +96,100 @@
 
         button:active {
             transform: translateY(5px);
-            box-shadow:
-                0 0 0 #3c7020;
+            box-shadow: 0 0 0 #3c7020;
         }
 
-        /* =========================
-           BASURA
-           ========================= */
+        /* LIBROS Y STICKERS */
 
-        .basura {
+        .libro {
             position: fixed;
-
             font-size: 40px;
-
             pointer-events: none;
-
             animation: aparecer 0.5s ease-out forwards;
         }
 
         @keyframes aparecer {
-
             0% {
                 opacity: 0;
-                transform:
-                    translateY(30px)
-                    rotate(0deg)
-                    scale(0);
+                transform: translateY(30px) rotate(0deg) scale(0);
             }
 
             100% {
                 opacity: 1;
-                transform:
-                    translateY(0)
-                    rotate(360deg)
-                    scale(1);
+                transform: translateY(0) rotate(360deg) scale(1);
             }
         }
 
-        /* =========================
-           NPC
-           ========================= */
+        /* ALARMAS */
 
-        .npc {
+        .alarma {
             position: fixed;
-
             font-size: 50px;
-
-            animation:
-                caminar 4s linear forwards;
-
             pointer-events: none;
+            animation: caminar 4s linear forwards;
         }
 
         @keyframes caminar {
-
-            from {
-                transform: translateX(-100px);
-            }
-
-            to {
-                transform: translateX(110vw);
-            }
+            from { transform: translateX(-100px); }
+            to { transform: translateX(110vw); }
         }
 
-        /* =========================
-           MENSAJE FINAL
-           ========================= */
+        /* MENSAJE FINAL */
 
         #mensajeFinal {
             display: none;
-
             position: fixed;
             inset: 0;
-
             z-index: 100;
-
             justify-content: center;
             align-items: center;
-
+            flex-direction: column;
+            gap: 30px;
             text-align: center;
-
-            background:
-                rgba(0, 0, 0, 0.75);
-
-            animation: entrada 0.5s ease;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
         }
 
         #mensajeFinal h2 {
             color: white;
-
-            font-size: clamp(60px, 12vw, 180px);
-
+            font-size: clamp(35px, 8vw, 100px);
             font-weight: 900;
-
-            text-transform: uppercase;
-
             text-shadow:
                 0 0 10px red,
                 0 0 30px red,
                 0 0 60px red;
 
-            animation:
-                temblar 0.12s infinite alternate;
+            animation: temblar 0.12s infinite alternate;
         }
 
-        @keyframes entrada {
+        #cuentaRegresiva {
+            color: yellow;
+            font-size: clamp(80px, 15vw, 160px);
+            font-weight: 900;
+            text-shadow: 0 0 30px orange;
+        }
 
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        #resultado {
+            display: none;
+            color: red;
+            font-size: clamp(50px, 12vw, 150px);
+            font-weight: 900;
+            text-shadow: 0 0 30px red;
+            animation: temblar 0.12s infinite alternate;
         }
 
         @keyframes temblar {
-
-            from {
-                transform: rotate(-2deg) scale(1);
-            }
-
-            to {
-                transform: rotate(2deg) scale(1.04);
-            }
+            from { transform: rotate(-2deg) scale(1); }
+            to { transform: rotate(2deg) scale(1.04); }
         }
 
-        /* Oscurecimiento progresivo */
+        /* OSCURECIMIENTO */
 
         .caos {
             position: fixed;
             inset: 0;
-
             pointer-events: none;
-
             background: rgba(80, 0, 0, 0);
-
             transition: 1s;
         }
 
@@ -260,157 +198,185 @@
 
 <body>
 
-    <!-- Fondo -->
     <div class="fondo"></div>
-
-    <!-- Capa que se vuelve más oscura con el caos -->
     <div class="caos" id="caos"></div>
-
 
     <main class="contenedor">
 
-        <h1>🗑️ BASURERO DEL CAOS 🗑️</h1>
+        <h1>📚 CAOS ACADÉMICO 📚</h1>
 
         <div id="contador">
-            Basura generada: 0
+            Intentos de estudio: 0 / 15
         </div>
 
-        <button onclick="generarCaos()">
-            🗑️ GENERAR BASURA
+        <button id="boton" onclick="generarCaos()">
+            📚 ¡ESTUDIAR!
         </button>
 
     </main>
 
-
-    <!-- Mensaje final -->
+    <!-- MENSAJE FINAL -->
 
     <div id="mensajeFinal">
-        <h2>
-            DIEGO<br>
-            VIENE POR TI
-        </h2>
-    </div>
 
+        <h2>🚨 EYDENN<br>¡LA ALARMA SUENA! 🚨</h2>
+
+        <div id="cuentaRegresiva"></div>
+
+        <div id="resultado">
+            NO VA A IR.
+        </div>
+
+    </div>
 
     <script>
 
-        let basura = 0;
+        let intentos = 0;
+        let terminado = false;
 
-        // Diferentes objetos que pueden aparecer
+        // Objetos de estudio
 
-        const basuraTipos = [
-            "🗑️",
-            "🛢️",
-            "📦",
-            "🥫",
-            "🍾",
-            "🧴",
-            "🛍️",
-            "🧻",
-            "🍌",
-            "💩"
+        const objetosEstudio = [
+            "📚",
+            "📖",
+            "📕",
+            "📗",
+            "📘",
+            "📙",
+            "📓",
+            "📒",
+            "✏️",
+            "🖊️",
+            "📐",
+            "📏",
+            "📝",
+            "📎",
+            "⭐",
+            "💡",
+            "🎓"
         ];
 
-        // Personajes ficticios / NPCs
+        // Alarmas y personajes
 
-        const npcTipos = [
-            "🧍",
-            "🚶",
-            "🧑‍🦯",
-            "👨‍🦱"
+        const alarmas = [
+            "⏰",
+            "🚨",
+            "🔔",
+            "📢",
+            "⏱️"
         ];
-
 
         function generarCaos() {
 
-            basura++;
+            if (terminado) return;
 
-            // Actualizar contador
+            intentos++;
 
             document.getElementById("contador").textContent =
-                "Basura generada: " + basura;
+                "Intentos de estudio: " + intentos + " / 15";
 
-
-            // Crear basura
+            // Generar libros y stickers
 
             for (let i = 0; i < 3; i++) {
 
-                const objeto =
-                    document.createElement("div");
+                const objeto = document.createElement("div");
 
-                objeto.className = "basura";
+                objeto.className = "libro";
 
                 objeto.textContent =
-                    basuraTipos[
-                        Math.floor(
-                            Math.random() *
-                            basuraTipos.length
-                        )
+                    objetosEstudio[
+                        Math.floor(Math.random() * objetosEstudio.length)
                     ];
 
-                objeto.style.left =
-                    Math.random() * 95 + "vw";
-
-                objeto.style.top =
-                    55 + Math.random() * 40 + "vh";
+                objeto.style.left = Math.random() * 95 + "vw";
+                objeto.style.top = 55 + Math.random() * 40 + "vh";
 
                 document.body.appendChild(objeto);
 
             }
 
+            // Cada 3 intentos aparece una alarma
 
-            // Cada 3 clics aparece un NPC ficticio
+            if (intentos % 3 === 0) {
 
-            if (basura % 3 === 0) {
+                const alarma = document.createElement("div");
 
-                const npc =
-                    document.createElement("div");
+                alarma.className = "alarma";
 
-                npc.className = "npc";
+                alarma.textContent =
+                    alarmas[Math.floor(Math.random() * alarmas.length)];
 
-                npc.textContent =
-                    npcTipos[
-                        Math.floor(
-                            Math.random() *
-                            npcTipos.length
-                        )
-                    ];
+                alarma.style.top = 50 + Math.random() * 40 + "vh";
+                alarma.style.left = "-80px";
 
-                npc.style.top =
-                    50 + Math.random() * 40 + "vh";
-
-                npc.style.left = "-80px";
-
-                document.body.appendChild(npc);
+                document.body.appendChild(alarma);
 
                 setTimeout(() => {
-                    npc.remove();
+                    alarma.remove();
                 }, 4500);
             }
 
+            // Aumentar el caos
 
-            // Aumentar progresivamente el caos
+            const intensidad = Math.min(intentos / 30, 0.5);
 
-            const intensidad =
-                Math.min(basura / 50, 0.5);
-
-            document.getElementById("caos")
-                .style.background =
+            document.getElementById("caos").style.background =
                 `rgba(80, 0, 0, ${intensidad})`;
 
+            // FINAL DESPUÉS DE 15 INTENTOS
 
-            // =========================
-            // FINAL
-            // =========================
+            if (intentos >= 15) {
 
-            if (basura >= 20) {
+                terminado = true;
 
-                document.getElementById("mensajeFinal")
-                    .style.display = "flex";
+                document.getElementById("boton").disabled = true;
 
+                document.getElementById("mensajeFinal").style.display = "flex";
+
+                iniciarCuentaRegresiva();
             }
 
         }
+
+        // CUENTA REGRESIVA
+
+        function iniciarCuentaRegresiva() {
+
+            const cuenta = document.getElementById("cuentaRegresiva");
+
+            const resultado = document.getElementById("resultado");
+
+            let numero = 3;
+
+            cuenta.textContent = numero;
+
+            const intervalo = setInterval(() => {
+
+                numero--;
+
+                if (numero > 0) {
+
+                    cuenta.textContent = numero;
+
+                } else {
+
+                    clearInterval(intervalo);
+
+                    cuenta.style.display = "none";
+
+                    resultado.style.display = "block";
+
+                }
+
+            }, 1000);
+
+        }
+
+    </script>
+
+</body>
+</html>
+
 
     </script>
 
